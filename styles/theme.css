@@ -1,0 +1,9 @@
+.temp-cold { color: #3B82F6; }
+.temp-cool { color: #06B6D4; }
+.temp-mild { color: #22C55E; }
+.temp-warm { color: #F97316; }
+.temp-hot { color: #EF4444; }
+
+.weather-sunny { color: #FCD34D; }
+.weather-cloudy { color: #9CA3AF; }
+.weather-rainy { color: #60A5FA; }
