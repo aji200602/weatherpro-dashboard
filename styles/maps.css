@@ -1,0 +1,32 @@
+.gmap-container {
+  width: 100%;
+  height: 100%;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.gmap-marker {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.gmap-marker:hover {
+  transform: scale(1.1);
+}
+
+.weather-icon {
+  width: 4rem;
+  height: 4rem;
+  animation: slideInDown 0.5s ease-out;
+}
+
+@keyframes slideInDown {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
