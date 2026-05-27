@@ -1,0 +1,115 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  password      String
+  name          String?
+  emailVerified DateTime?
+  image         String?
+  theme         String    @default("dark") // dark or light
+  temperatureUnit String @default("celsius")
+  speedUnit     String    @default("kmh")
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  favorites     FavoriteLocation[]
+  weatherHistory WeatherHistory[]
+  mapPreferences MapPreference?
+  accounts      Account[]
+  sessions      Session[]
+}
+
+model Account {
+  id                 String  @id @default(cuid())
+  userId             String
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String?  @db.Text
+  access_token       String?  @db.Text
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?  @db.Text
+  session_state      String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model FavoriteLocation {
+  id            String    @id @default(cuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  city          String
+  lat           Float
+  lon           Float
+  country       String
+  countryCode   String
+  isPrimary     Boolean   @default(false)
+  notes         String?   // user notes tentang lokasi
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([userId])
+}
+
+model WeatherHistory {
+  id            String    @id @default(cuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  city          String
+  lat           Float
+  lon           Float
+  temperature   Float
+  humidity      Int
+  pressure      Int
+  windSpeed     Float
+  description   String
+  timestamp     DateTime  @default(now())
+
+  @@index([userId])
+  @@index([timestamp])
+}
+
+model MapPreference {
+  id              String    @id @default(cuid())
+  userId          String    @unique
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  defaultZoom     Int       @default(10)
+  defaultCenter   String    @default("0,0") // lat,lon
+  mapStyle        String    @default("roadmap") // roadmap, satellite, terrain, hybrid
+  showHeatmap     Boolean   @default(false)
+  showWeatherLayer Boolean  @default(true)
+  clusterMarkers  Boolean   @default(true)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}

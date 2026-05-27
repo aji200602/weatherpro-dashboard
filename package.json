@@ -1,0 +1,52 @@
+{
+  "name": "weatherpro-dashboard",
+  "version": "1.0.0",
+  "description": "Modern weather dashboard with real-time updates & Google Maps integration",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:push": "prisma db push",
+    "prisma:studio": "prisma studio"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "next": "^14.1.4",
+    "typescript": "^5.3.3",
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
+    "@types/node": "^20.11.5",
+    "autoprefixer": "^10.4.17",
+    "postcss": "^8.4.33",
+    "tailwindcss": "^3.4.1",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.1",
+    "tailwind-merge": "^2.2.2",
+    "@radix-ui/react-dialog": "^1.1.1",
+    "@radix-ui/react-dropdown-menu": "^2.0.6",
+    "@radix-ui/react-slot": "^2.0.2",
+    "lucide-react": "^0.344.0",
+    "recharts": "^2.10.3",
+    "framer-motion": "^10.16.16",
+    "@vis.gl/react-google-maps": "^0.11.0",
+    "socket.io-client": "^4.7.2",
+    "axios": "^1.6.7",
+    "prisma": "^5.8.1",
+    "@prisma/client": "^5.8.1",
+    "next-auth": "^5.0.0-beta.14",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.3.1",
+    "zustand": "^4.4.7",
+    "date-fns": "^2.30.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.56.0",
+    "eslint-config-next": "^14.1.4",
+    "@types/bcryptjs": "^2.4.6"
+  }
+}
